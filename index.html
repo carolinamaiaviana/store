@@ -1,0 +1,504 @@
+<html>
+  <head>
+    <title>Store</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              clifford: '#da373d',
+            }
+          }
+        }
+      }
+    </script>
+
+  </head>
+  <body>
+    <nav class="bg-white">
+      <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+        <div class="relative flex h-16 items-center justify-between">
+          <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+            <!-- Mobile menu button-->
+            <button id="menuButton" type="button" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
+              <span class="absolute -inset-0.5"></span>
+              <span class="sr-only">Open main menu</span>
+              <!--
+                Icon when menu is closed.
+    
+                Menu open: "hidden", Menu closed: "block"
+              -->
+              <svg class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+              </svg>
+              <!--
+                Icon when menu is open.
+    
+                Menu open: "block", Menu closed: "hidden"
+              -->
+              <svg class="hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+            <div class="flex flex-shrink-0 items-center">
+              <i class="fa-brands fa-shopify h-8 w-auto text-red-600 text-2xl"></i>
+              <!-- <img class="h-8 w-auto" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company"> -->
+            </div>
+            <div id="menuColapse" class="sm:ml-6 sm:block hidden">
+              <div class="flex space-x-4">
+                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+                <a href="#sectionTwo" class=" text-dark rounded-md px-3 py-2 text-sm font-medium hover:bg-red-600 hover:text-white" aria-current="page">Best Sellers</a>
+                <a href="#sectionThree" class="text-dark hover:bg-red-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Categorys</a>
+                <a href="#sectionFourr" class="text-dark hover:bg-red-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium">New In</a>
+                <a href="#sectionFive" class="text-dark hover:bg-red-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Follow Us</a>
+                <a href="#sectionSix" class="text-dark hover:bg-red-600 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Info</a>
+              </div>
+            </div>
+          </div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <button type="button" class="relative rounded-full bg-red-600 p-1 text-white hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+              <span class="absolute -inset-1.5"></span>
+              <span class="sr-only">View notifications</span>
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 005.454-1.31A8.967 8.967 0 0118 9.75v-.7V9A6 6 0 006 9v.75a8.967 8.967 0 01-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 01-5.714 0m5.714 0a3 3 0 11-5.714 0" />
+              </svg>
+            </button>
+    
+            <!-- Profile dropdown -->
+            <div class="relative ml-3">
+              <div>
+                <button type="button" class="relative flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
+                  <span class="absolute -inset-1.5"></span>
+                  <span class="sr-only">Open user menu</span>
+                </button>
+              </div>
+    
+            </div>
+          </div>
+        </div>
+      </div>
+    
+      <!-- Mobile menu, show/hide based on menu state. -->
+      <div class="sm:hidden hidden" id="menuColapseDown">
+        <div class="space-y-1 px-2 pb-3 pt-2">
+          <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-gray-700 hover:text-white" -->
+          <a href="#" class="bg-red-600 text-white block rounded-md px-3 py-2 text-base font-medium" aria-current="page">Dashboard</a>
+          <a href="#" class="text-gray-300 hover:bg-red-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Team</a>
+          <a href="#" class="text-gray-300 hover:bg-red-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Projects</a>
+          <a href="#" class="text-gray-300 hover:bg-red-600 hover:text-white block rounded-md px-3 py-2 text-base font-medium">Calendar</a>
+        </div>
+      </div>
+    </nav>
+    
+
+    <div id="sectionOne" class="sectionOne relative items-center">
+      <div id="imageOne" class="overflow-hidden">
+            <img class=" w-full h-auto md:h-full object-cover " src="images/tenis2.jpg" alt="">
+          </div>
+          <div id="textOne" class="textOne absolute flex flex-col gap-2">
+            <h1 class=" text-3xl md:text-5xl">A T500</h1>
+            <hr class="border-4 border-red-600 rounded-md">
+            <span class="text-xl">Silence, please</span>
+            <button class="bg-red-600 hover:bg-gray-500 text-white font-bold py-2 px-4 border rounded">
+              Shop Now
+            </button>
+          </div>
+    </div>
+
+    <div id="sectionTwo" class="mt-4 flex flex-col gap-2">
+      <h1 class="text-3xl md:text-4xl ml-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >Best Sellers</h1>
+
+      <div id="cardsTwo" class="flex flex-wrap gap-8 justify-center items-center">
+        <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+          <div id='imgContainer' class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md ">
+            <img id="img-teste1" class="w-full h-full object-cover " src="images/tenis3.jpg" alt="">
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Air </h1>
+              <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£39,90</h1>
+            </div>
+
+            <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+          </div>
+        </div>
+
+        <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+          <div id="imgCointainer2" class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+            <img id="img-teste2" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1597045566677-8cf032ed6634?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk </h1>
+              <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£57,90</h1>
+            </div>
+
+            <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+          </div>
+        </div>
+
+        <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+          <div id="imgCointainer3" class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+            <img id="img-teste3" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1576229086948-cfba99afcca5?q=80&w=987&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike MD Valiant </h1>
+              <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£45,90</h1>
+            </div>
+
+            <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+          </div>
+        </div>
+
+        <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+          <div id="imgCointainer4" class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+            <img id="img-teste4" class="w-full h-full object-cover " src="https://images.unsplash.com/photo-1593081891731-fda0877988da?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+          </div>
+          <div>
+            <div class="flex justify-between">
+              <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Air Max </h1>
+              <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£49,90</h1>
+            </div>
+
+            <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+          </div>
+        </div>
+
+        
+      </div>
+    </div>
+
+    <div id="sectionThree" class="mt-4 flex flex-col gap-4">
+      <h1 class="text-3xl md:text-4xl ml-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >Categorys</h1>
+
+      <div class="w-full flex justify-center items-center">
+        <div id="cardsThree" class="flex flex-wrap gap-8 justify-center items-center">
+          <div id="singleCardThree" class=" lg:w-96 flex flex-col flex-wrap m-4">
+            <div class="cursor-pointer w-full flex justify-center items-center overflow-hidden rounded-sm">
+              <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://images.unsplash.com/photo-1556906781-9a412961c28c?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+            <h1 class="underline cursor-pointe text-2xl" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Shoes </h1>
+          </div>
+
+          <div id="singleCardThree" class="lg:w-96 flex flex-col flex-wrap m-4">
+            <div class="cursor-pointer w-full flex justify-center items-center overflow-hidden rounded-sm">
+              <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://images.unsplash.com/photo-1596637510298-637b184503e1?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+            </div>
+            <h1 class="underline cursor-pointer text-2xl" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Clothing </h1>
+          </div>
+
+          <div id="singleCardThree" class=" lg:w-96 flex flex-col flex-wrap m-4">
+            <div class="cursor-pointer w-full flex justify-center items-center overflow-hidden rounded-sm">
+              <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/27/0d/84/270d8417f0137f0109882fdd9861c322.jpg" alt="">
+            </div>
+            <h1 class="underline cursor-pointer text-2xl" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Accessories </h1>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div>
+      <h1 class="text-3xl md:text-4xl ml-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >New In</h1>
+      </div>
+
+     <div id="sectionFourr" class="w-3/4  m-auto relative flex items-center rounded-md overflow-hidden">
+        <div class="w-full flex justify-between absolute px-3">
+          <i id="botaoLeft"  class="z-20 fa-solid fa-arrow-left text-5xl text-gray-300 drop-shadow-lg"></i>
+          <i id="botaoRight" class="z-20 fa-solid fa-arrow-right text-5xl text-gray-300 drop-shadow-lg"></i>
+        </div>
+        <div id="banner" class="scroll-container scroll-bar-hidden flex overflow-x-auto gap-3">
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/4c/87/dd/4c87dd9a825e4289fe345952774a4faf.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk Low Premium </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£69,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/736x/fd/cc/17/fdcc17d01748b0787cf48116f92596ae.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Court Vision Mid Blue </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£58,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://images.unsplash.com/photo-1491553895911-0055eca6402d?q=80&w=1780&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Venture Runner </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£69,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/77/b1/eb/77b1ebab47456a5817ee4ef0361f0ec4.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk Low Yellow </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£59,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/736x/f5/45/31/f54531d7593bebdad664c7bc50342b22.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk Low Next Black </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£65,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/736x/aa/25/71/aa257187dcff3b3e4315bab9e7ced327.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike SB Chron 2 </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£52,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300 " src="https://i.pinimg.com/564x/d7/9c/2a/d79c2adf95b3a5f2e2ec204276b298f1.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk Low Bronze </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£46,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/07/bb/e9/07bbe9e7daf6213cfcba10f063b7c74e.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Dunk High Blue </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£59,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/b7/b7/f7/b7b7f79fdba4187892dfc5f4c919af7d.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Air Jordan 1 Low </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£57,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          <div id="foto" class="min-w-72 max-w-72">
+            <div id="singleCardTwo" class="w-72 flex flex-col flex-wrap">
+              <div class="h-96 w-full flex justify-center items-center overflow-hidden rounded-md">
+                <img class="w-full h-full object-cover hover:scale-125 duration-300" src="https://i.pinimg.com/564x/03/3d/53/033d539144fde5628aa3041d4d774165.jpg" alt="">
+              </div>
+              <div>
+                <div class="flex justify-between">
+                  <h1 style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Nike Court Vision Low </h1>
+                  <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">£45,90</h1>
+                </div>
+    
+                <h1 style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">unissex</h1>
+              </div>
+            </div>
+          </div>
+          
+        </div>
+     </div>
+
+     <div id="sectionFive" class="m-8">
+      <div class="flex">
+        <h1 class="text-3xl md:text-4xl ml-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;" >Follow our instagram</h1>
+        <h1 class="text-3xl md:text-3xl ml-4" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">@shopMoreAna</h1>
+      </div>
+
+      
+
+      <div class=" principal">
+        <div class="galeria">
+          <div class="itemGaleria item01">
+            <video class="imgGaleria" autoplay loop src="images/video1.mp4"></video>
+          </div>
+          <div class="itemGaleria item02">
+            <img class="imgGaleria" src="https://di2ponv0v5otw.cloudfront.net/posts/2021/12/31/61cfd47d045e395a028e12a2/m_61cfd490ff83041fa35d20f6.jpg" alt="">
+          </div>
+          <div class="itemGaleria item03">
+            <video class="imgGaleria" autoplay loop src="images/video3.mp4"></video>
+          </div>
+          <div class="itemGaleria item04">
+            <img class="imgGaleria" src="https://littlesundays.com/wp-content/uploads/2023/03/NikeDunksOutfits-missjamiefirth-6-1080x1350-1-819x1024.jpg" alt="">
+          </div>
+          <div class="itemGaleria item05">
+            <img class="imgGaleria" src="https://static.nike.com/a/images/f_auto,cs_srgb/w_1920,c_limit/4ffc6a2c-d10a-4baa-abb0-59db155cf076/nikelab.jpg" alt="">
+          </div>
+          <div class="itemGaleria item06">
+            <img class="imgGaleria" src="https://i.pinimg.com/originals/81/23/9e/81239e658baabb2cfc1c2a0301bdfe40.jpg" alt="">
+          </div>
+        </div>
+
+  
+
+      
+
+      </div>
+
+     </div>
+
+     <footer id="sectionSix" class="bg-red-600 dark:bg-red-600 mt-8">
+      <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+          <div class="md:flex md:justify-between">
+            <div class="mb-6 md:mb-0">
+                <a href="https://flowbite.com/" class="flex items-center">
+                  <i class="fa-brands fa-shopify text-white text-2xl mr-2"></i>
+                    <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">ShopMore</span>
+                </a>
+            </div>
+            <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Resources</h2>
+                    <ul class="text-white dark:text-white font-medium">
+                        <li class="mb-4">
+                            <a href="https://flowbite.com/" class="hover:underline">ShopMore</a>
+                        </li>
+                        <li>
+                            <a href="https://tailwindcss.com/" class="hover:underline">Products</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Follow us</h2>
+                    <ul class="text-white dark:text-white font-medium">
+                        <li class="mb-4">
+                            <a href="https://github.com/themesberg/flowbite" class="hover:underline ">Github</a>
+                        </li>
+                        <li>
+                            <a href="https://discord.gg/4eeurUVvTy" class="hover:underline">Discord</a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="mb-6 text-sm font-semibold text-white uppercase dark:text-white">Legal</h2>
+                    <ul class="text-white dark:text-white font-medium">
+                        <li class="mb-4">
+                            <a href="#" class="hover:underline">Privacy Policy</a>
+                        </li>
+                        <li>
+                            <a href="#" class="hover:underline">Terms &amp; Conditions</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr class="my-6 border-white sm:mx-auto dark:border-white lg:my-8" />
+        <div class="sm:flex sm:items-center sm:justify-between">
+            <span class="text-sm text-white sm:text-center dark:text-white">© 2024 <a href="https://flowbite.com/" class="hover:underline">AnaDeodato™</a>. All Rights Reserved.
+            </span>
+            <div class="flex mt-4 sm:justify-center sm:mt-0">
+                <a href="#" class="text-white hover:text-white dark:hover:text-white">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
+                          <path fill-rule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clip-rule="evenodd"/>
+                      </svg>
+                    <span class="sr-only">Facebook page</span>
+                </a>
+                <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 21 16">
+                          <path d="M16.942 1.556a16.3 16.3 0 0 0-4.126-1.3 12.04 12.04 0 0 0-.529 1.1 15.175 15.175 0 0 0-4.573 0 11.585 11.585 0 0 0-.535-1.1 16.274 16.274 0 0 0-4.129 1.3A17.392 17.392 0 0 0 .182 13.218a15.785 15.785 0 0 0 4.963 2.521c.41-.564.773-1.16 1.084-1.785a10.63 10.63 0 0 1-1.706-.83c.143-.106.283-.217.418-.33a11.664 11.664 0 0 0 10.118 0c.137.113.277.224.418.33-.544.328-1.116.606-1.71.832a12.52 12.52 0 0 0 1.084 1.785 16.46 16.46 0 0 0 5.064-2.595 17.286 17.286 0 0 0-2.973-11.59ZM6.678 10.813a1.941 1.941 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.919 1.919 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Zm6.644 0a1.94 1.94 0 0 1-1.8-2.045 1.93 1.93 0 0 1 1.8-2.047 1.918 1.918 0 0 1 1.8 2.047 1.93 1.93 0 0 1-1.8 2.045Z"/>
+                      </svg>
+                    <span class="sr-only">Discord community</span>
+                </a>
+                <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 17">
+                      <path fill-rule="evenodd" d="M20 1.892a8.178 8.178 0 0 1-2.355.635 4.074 4.074 0 0 0 1.8-2.235 8.344 8.344 0 0 1-2.605.98A4.13 4.13 0 0 0 13.85 0a4.068 4.068 0 0 0-4.1 4.038 4 4 0 0 0 .105.919A11.705 11.705 0 0 1 1.4.734a4.006 4.006 0 0 0 1.268 5.392 4.165 4.165 0 0 1-1.859-.5v.05A4.057 4.057 0 0 0 4.1 9.635a4.19 4.19 0 0 1-1.856.07 4.108 4.108 0 0 0 3.831 2.807A8.36 8.36 0 0 1 0 14.184 11.732 11.732 0 0 0 6.291 16 11.502 11.502 0 0 0 17.964 4.5c0-.177 0-.35-.012-.523A8.143 8.143 0 0 0 20 1.892Z" clip-rule="evenodd"/>
+                  </svg>
+                    <span class="sr-only">Twitter page</span>
+                </a>
+                <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                          <path fill-rule="evenodd" d="M10 .333A9.911 9.911 0 0 0 6.866 19.65c.5.092.678-.215.678-.477 0-.237-.01-1.017-.014-1.845-2.757.6-3.338-1.169-3.338-1.169a2.627 2.627 0 0 0-1.1-1.451c-.9-.615.07-.6.07-.6a2.084 2.084 0 0 1 1.518 1.021 2.11 2.11 0 0 0 2.884.823c.044-.503.268-.973.63-1.325-2.2-.25-4.516-1.1-4.516-4.9A3.832 3.832 0 0 1 4.7 7.068a3.56 3.56 0 0 1 .095-2.623s.832-.266 2.726 1.016a9.409 9.409 0 0 1 4.962 0c1.89-1.282 2.717-1.016 2.717-1.016.366.83.402 1.768.1 2.623a3.827 3.827 0 0 1 1.02 2.659c0 3.807-2.319 4.644-4.525 4.889a2.366 2.366 0 0 1 .673 1.834c0 1.326-.012 2.394-.012 2.72 0 .263.18.572.681.475A9.911 9.911 0 0 0 10 .333Z" clip-rule="evenodd"/>
+                    </svg>
+                    <span class="sr-only">GitHub account</span>
+                </a>
+                <a href="#" class="text-white hover:text-white dark:hover:text-white ms-5">
+                    <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M10 0a10 10 0 1 0 10 10A10.009 10.009 0 0 0 10 0Zm6.613 4.614a8.523 8.523 0 0 1 1.93 5.32 20.094 20.094 0 0 0-5.949-.274c-.059-.149-.122-.292-.184-.441a23.879 23.879 0 0 0-.566-1.239 11.41 11.41 0 0 0 4.769-3.366ZM8 1.707a8.821 8.821 0 0 1 2-.238 8.5 8.5 0 0 1 5.664 2.152 9.608 9.608 0 0 1-4.476 3.087A45.758 45.758 0 0 0 8 1.707ZM1.642 8.262a8.57 8.57 0 0 1 4.73-5.981A53.998 53.998 0 0 1 9.54 7.222a32.078 32.078 0 0 1-7.9 1.04h.002Zm2.01 7.46a8.51 8.51 0 0 1-2.2-5.707v-.262a31.64 31.64 0 0 0 8.777-1.219c.243.477.477.964.692 1.449-.114.032-.227.067-.336.1a13.569 13.569 0 0 0-6.942 5.636l.009.003ZM10 18.556a8.508 8.508 0 0 1-5.243-1.8 11.717 11.717 0 0 1 6.7-5.332.509.509 0 0 1 .055-.02 35.65 35.65 0 0 1 1.819 6.476 8.476 8.476 0 0 1-3.331.676Zm4.772-1.462A37.232 37.232 0 0 0 13.113 11a12.513 12.513 0 0 1 5.321.364 8.56 8.56 0 0 1-3.66 5.73h-.002Z" clip-rule="evenodd"/>
+                  </svg>
+                    <span class="sr-only">Dribbble account</span>
+                </a>
+            </div>
+        </div>
+      </div>
+  </footer>
+  
+
+      <script src="script.js"></script>
+      <style>
+        html {
+          scroll-behavior: smooth;
+        }
+        </style>
+      
+  </body>
+</html>
+
